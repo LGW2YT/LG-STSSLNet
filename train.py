@@ -13,9 +13,9 @@ import random
 import sys
 import os
 
-'''
-这里我们将纽约的数据作为案例进行注释，以便于读者的理解和可复线
-'''
+
+
+
 torch.autograd.set_detect_anomaly(True)
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
@@ -67,9 +67,9 @@ if config['seed'] is not None:
     np.random.seed(seed)
     random.seed(seed)
 
-'''
-基础参数，包括数据的划分比率、数据特征尺度、epoch等信息
-'''
+
+
+
 train_rate = config['train_rate']
 valid_rate = config['valid_rate']
 recent_prior = config['recent_prior']
@@ -199,11 +199,7 @@ def main(config):
     scheduler_pred = Scheduler(optimizer_pred, T_max=config['T_max'], eta_min=config['eta_min'])
     scheduler_graph = None
 
-    # --------------------------- Train -------------------------
-    #net_trainer = trainer.AdapGLTrainer(
-    #    adj_filename, grid_node_map, risk_mask, config['data_type'], DGSTNET_Model, GraphLearn_Model, optimizer_pred, optimizer_graph,
-    #    scheduler_pred, scheduler_graph, config['num_epoch'], config['num_iter'], scaler, config['model_save_path'], config['lam'], patience
-    #)
+
     net_trainer = trainer.E2ETrainer(
          adj_filename, grid_node_map, risk_mask, config['data_type'], DGSTNET_Model, GraphLearn_Model, optimizer_pred, optimizer_graph,
              scheduler_pred, scheduler_graph, config['num_epoch'], config['num_iter'], scaler, config['model_save_path'], config['lam'], patience
